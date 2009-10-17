@@ -1,5 +1,5 @@
-currency_magic
-=============
+= CurrencyMagic
+
 
 This plugin makes dealing with currency issues a little easier in Rails.
 
@@ -42,8 +42,7 @@ I'm sure you can see how I went from the above, to:
 
 "This is great and all, but how do I use it?" I think the best way would be with an example...
 
-Example
-=======
+= Example
 
 I don't know about you, but this is I use it:
 
