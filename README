@@ -1,13 +1,104 @@
-CurrencyMagic
+currency_magic
 =============
 
-Introduction goes here.
+This plugin makes dealing with currency issues a little easier in Rails.
 
+As a general rule, when dealing with currency in applications you want to work solely with Integers, otherwise fuzzy things happen with Floats. For example:
+  >> (2.51*100).to_i
+  => 250
+  >> (2.50*100).to_i
+  => 250
+Aw, snap! Now imagine if that was one of dozens of calculations. You'd be off one cent here, another cent there, but never consistently. Hence the reason we like to do all our calculations with Integers.
+
+"Okay, so I want to use cents inside my applications, but users don't like seeing cents, they want to see dollars or euros or GBP or whatever. So how/where do I bridge the gap?"  I'm glad you asked...
+
+That's where currency_magic comes in handy. It's going to handle translation between dollars and cents for you. It does this by using virtual attributes on your ActiveRecord objects.  Let's say you have:
+
+  class Product < ActiveRecord::Base
+    validates_numericality_of :price, :only_integer => true, :greater_than => 0 # no free products!
+  end
+
+In essence, currency_magic will do this:
+
+  class Product < ActiveRecord::Base
+    validates_numericality_of :price, :only_integer => true, :greater_than => 0
+  
+    def price_dollars
+      (self.price * 100).to_i
+    end
+  
+    def price_dollars=(price)
+      self.price = price / 100
+    end
+  end
+
+I'm sure you can see how I went from the above, to:
+
+  class Product < ActiveRecord::Base
+    validates_numericality_of :price, :only_integer => true, :greater_than => 0 # no free products!
+  
+    currency_magic :dollars, :price
+  end
+
+"This is great and all, but how do I use it?" I think the best way would be with an example...
 
 Example
 =======
 
-Example goes here.
+I don't know about you, but this is I use it:
 
+  rails my_cool_app
+  cd my_cool_app
+  script/generate scaffold Product name:string description:text price:integer sale_price:integer cost:integer inventory:integer
+  rake db:migrate
+  script/plugin install git://github.com/jtanium/currency_magic.git
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Now in app/models/product.rb:
+
+  class Product < ActiveRecord::Base
+    currency_magic :dollars, :price, :sale_price, :cost
+  end
+
+This allows us to use the Product#price_dollars, Product#sale_price_dollars, and Product#cost_dollars methods in the views.  So we'll change app/views/products/new.html.erb like so:
+
+  <h1>New product</h1>
+  
+  <% form_for(@product) do |f| %>
+    <%= f.error_messages %>
+  
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </p>
+    <p>
+      <%= f.label :price %><br />
+      <%= f.text_field :price_dollars %>
+    </p>
+    <p>
+      <%= f.label :sales_price %><br />
+      <%= f.text_field :sales_price_dollars %>
+    </p>
+    <p>
+      <%= f.label :cost %><br />
+      <%= f.text_field :cost_dollars %>
+    </p>
+    <p>
+      <%= f.label :inventory %><br />
+      <%= f.text_field :inventory %>
+    </p>
+    <p>
+      <%= f.submit 'Create' %>
+    </p>
+  <% end %>
+  
+  <%= link_to 'Back', products_path %>
+
+Notice how we left the labels as just :price? That's because our error messages are still going to say 'Price'.
+
+That's it! You can do your arithmetic using :price, and use :price_dollars for the user interface.
+
+Copyright (c) 2009 Jason Edwards <jtanium@gmail.com>, released under the MIT license
