@@ -31,7 +31,10 @@ module CurrencyMagic
 
   private
     def to_cents(dollars)
-      (currency_to_f(dollars) * 100).round
+      f = currency_to_f(dollars)
+      return nil if f.nil?
+
+      (f * 100).round
     end
 
     def to_dollars(an_int)
