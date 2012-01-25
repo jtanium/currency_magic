@@ -48,9 +48,10 @@ I don't know about you, but this is I use it:
 
   rails my_cool_app
   cd my_cool_app
+  # add "gem 'currency_magic'" to your Gemfile
+  bundle install
   script/generate scaffold Product name:string description:text price:integer sale_price:integer cost:integer inventory:integer
   rake db:migrate
-  script/plugin install git://github.com/jtanium/currency_magic.git
 
 Now in app/models/product.rb:
 
