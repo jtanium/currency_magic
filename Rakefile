@@ -1,13 +1,9 @@
 require 'rake'
-require 'rake/testtask'
+require 'rspec'
+require 'rspec/core/rake_task'
 
-desc 'Default: run unit tests.'
-task :default => :test
+desc 'Default: run specs.'
+task :default => :spec
 
-desc 'Test the currency_magic plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
+desc "Run specs"
+RSpec::Core::RakeTask.new

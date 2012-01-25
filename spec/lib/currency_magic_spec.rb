@@ -30,6 +30,11 @@ describe CurrencyMagic do
       to_cents(6.49).should eq(649)
       to_cents(6.51).should eq(651)
     end
+    context "when amount is nil" do
+      it "should return nil" do
+        to_cents(nil).should be_nil
+      end
+    end
   end
 
   describe "#to_dollars" do
