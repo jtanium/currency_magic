@@ -23,7 +23,10 @@ module CurrencyMagic
     # @param [Float] dollars the amount as dollars
     # @return [Integer] the amount as cents
     def to_cents(dollars)
-      (currency_to_f(dollars) * 100).round
+      f = currency_to_f(dollars)
+      return nil if f.nil?
+
+      (f * 100).round
     end
 
     # Converts cents to dollars by dividing by 100
