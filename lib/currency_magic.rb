@@ -33,7 +33,9 @@ module CurrencyMagic
     #
     # @param [Integer] cents the amount as cents
     # @return [Float] the amount as dollars
-    def to_dollars(an_int)
-      an_int.to_f / 100
+    def to_dollars(cents)
+      return nil if cents.nil?
+
+      cents.to_f / 100
     end
 end

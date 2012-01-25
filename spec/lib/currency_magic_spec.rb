@@ -23,6 +23,9 @@ describe CurrencyMagic do
       currency_to_f('5.49$').should eq(5.49)
       currency_to_f('5.51$').should eq(5.51)
     end
+    context "when currency is nil" do
+      it("should return nil") { currency_to_f(nil).should be_nil }
+    end
   end
 
   describe "#to_cents" do
@@ -30,12 +33,18 @@ describe CurrencyMagic do
       to_cents(6.49).should eq(649)
       to_cents(6.51).should eq(651)
     end
+    context "when dollars is nil" do
+      it("should return nil") { to_cents(nil).should be_nil }
+    end
   end
 
   describe "#to_dollars" do
     it "should divide by 100" do
       to_dollars(749).should eq(7.49)
       to_dollars(751).should eq(7.51)
+    end
+    context "when cents is nil" do
+      it("should return nil") { to_dollars(nil).should be_nil }
     end
   end
 end
