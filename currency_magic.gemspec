@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'currency_magic'
-  s.version     = '0.1.0'
-  s.date        = '2012-01-20'
+  s.version     = '0.2.1'
+  s.date        = '2012-01-25'
   s.summary     = ""
-  s.description = "Converts currency to/from cents"
+  s.description = "Converts monetary unit to/from cents"
   s.authors     = ["Jason Edwards"]
   s.email       = 'jtanium@gmail.com'
   s.files       = [
