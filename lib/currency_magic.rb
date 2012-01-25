@@ -18,22 +18,22 @@ module CurrencyMagic
   end
 
   private
-    # Converts dollars to cents by multiplying by 100
+    # Converts a monetary unit to cents by multiplying by 100
     #
-    # @param [Float] dollars the amount as dollars
+    # @param [Float] monetary_unit the amount as a whole monetary unit
     # @return [Integer] the amount as cents
-    def to_cents(dollars)
-      f = currency_to_f(dollars)
+    def to_cents(monetary_unit)
+      f = currency_to_f(monetary_unit)
       return nil if f.nil?
 
       (f * 100).round
     end
 
-    # Converts cents to dollars by dividing by 100
+    # Converts cents to a monetary unit by dividing by 100
     #
     # @param [Integer] cents the amount as cents
-    # @return [Float] the amount as dollars
-    def to_dollars(cents)
+    # @return [Float] the amount as a monetary unit
+    def to_monetary_unit(cents)
       return nil if cents.nil?
 
       cents.to_f / 100

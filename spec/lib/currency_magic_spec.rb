@@ -40,13 +40,13 @@ describe CurrencyMagic do
     end
   end
 
-  describe "#to_dollars" do
+  describe "#to_monetary_unit" do
     it "should divide by 100" do
-      to_dollars(749).should eq(7.49)
-      to_dollars(751).should eq(7.51)
+      to_monetary_unit(749).should eq(7.49)
+      to_monetary_unit(751).should eq(7.51)
     end
     context "when cents is nil" do
-      it("should return nil") { to_dollars(nil).should be_nil }
+      it("should return nil") { to_monetary_unit(nil).should be_nil }
     end
   end
 end

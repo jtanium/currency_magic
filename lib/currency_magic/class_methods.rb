@@ -6,7 +6,7 @@ module CurrencyMagic
       methods.each do |method|
         class_eval <<-EOD
           def #{method}_#{currency}
-            to_dollars self.#{method}
+            to_monetary_unit self.#{method}
           end
           def #{method}_#{currency}=(#{method})
             self.#{method} = to_cents(#{method})
