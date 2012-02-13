@@ -13,15 +13,23 @@ describe CurrencyMagic do
 
       currency_to_f(2.49).should eq(2.49)
       currency_to_f(2.51).should eq(2.51)
+      currency_to_f(-2.49).should eq(-2.49)
+      currency_to_f(-2.51).should eq(-2.51)
 
       currency_to_f('3.49').should eq(3.49)
       currency_to_f('3.51').should eq(3.51)
+      currency_to_f('-3.49').should eq(-3.49)
+      currency_to_f('-3.51').should eq(-3.51)
 
       currency_to_f('$4.49').should eq(4.49)
       currency_to_f('$4.51').should eq(4.51)
+      currency_to_f('-$4.49').should eq(-4.49)
+      currency_to_f('-$4.51').should eq(-4.51)
 
       currency_to_f('5.49$').should eq(5.49)
       currency_to_f('5.51$').should eq(5.51)
+      currency_to_f('-5.49$').should eq(-5.49)
+      currency_to_f('-5.51$').should eq(-5.51)
     end
     context "when currency is nil" do
       it("should return nil") { currency_to_f(nil).should be_nil }

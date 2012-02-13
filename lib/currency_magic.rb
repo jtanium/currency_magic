@@ -14,7 +14,7 @@ module CurrencyMagic
     return nil if currency.nil?
     return currency.to_f if currency.is_a?(Fixnum)
 
-    currency.to_s.gsub(/[^0-9.]/, '').to_f
+    currency.to_s.gsub(/[^-0-9.]/, '').to_f
   end
 
   private
