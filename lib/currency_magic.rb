@@ -12,7 +12,7 @@ module CurrencyMagic
   def currency_to_f(currency)
 
     return nil if currency.nil?
-    return currency.to_f if currency.is_a?(Fixnum)
+    return currency.to_f if currency.is_a?(Integer)
 
     currency.to_s.gsub(/[^-0-9.]/, '').to_f
   end
