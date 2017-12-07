@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'currency_magic'
-  s.version     = '0.2.1'
+  s.version     = '0.2.3'
   s.date        = '2012-01-25'
   s.summary     = ""
   s.description = "Converts monetary unit to/from cents"
